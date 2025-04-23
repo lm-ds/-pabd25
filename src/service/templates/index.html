@@ -76,10 +76,11 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('response').innerText =  JSON.stringify(data);
-            })
+            .then(response => response.json().then(json => ({ok : response.ok, body: json})))
+            .then(({ok, body}) => {
+                if (ok){
+                document.getElementById('response').innerText = body.Price;
+        }})
             .catch(error => {
                 console.error('Ошибка:', error);
                 document.getElementById('response').innerText = 'Произошла ошибка при отправке данных';
