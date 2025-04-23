@@ -28,16 +28,20 @@ def process_numbers():
     # Здесь можно добавить обработку полученных чисел
     # Для примера просто возвращаем их обратно
     numbers = request.get_json()
-    area = numbers['area']
-    rooms = numbers['rooms']
-    floors = numbers['floors']
-    floor = numbers['floor']
-    price = 50000 * int(area)
+    area = int(numbers['area'])
+    rooms = int(numbers['rooms'])
+    floors = int(numbers['floors'])
+    floor = int(numbers['floor'])
+    price = 300000 * int(area)
 
     logging.info(f'Полученные данные: Площадь квартиры, кв.м. = {area}, Кол-во комнат = {rooms}, Этажей в доме = {floors}, Желаемый этаж = {floor}')
-    logging.info(f'Расчётная цена: {price}')
 
-    return {'Price' : price}
+    if floors < floor:
+        error_msg = 'Выбранный этаж квартиры не может быть больше общего числа этажей.'
+        return {'Price' : error_msg}
+    else:
+        logging.info(f'Расчётная цена: {price}')
+        return {'Price' : price}
 
 
 

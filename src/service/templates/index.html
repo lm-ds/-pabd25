@@ -80,10 +80,11 @@
             .then(({ok, body}) => {
                 if (ok){
                 document.getElementById('response').innerText = body.Price;
-        }})
+                } 
+            })
             .catch(error => {
                 console.error('Ошибка:', error);
-                document.getElementById('response').innerText = 'Произошла ошибка при отправке данных';
+                document.getElementById('response').innerText = 'Произошла ошибка при отправке данных.';
             });
         }
     </script>
