@@ -8,7 +8,7 @@ moscow_parser = cianparser.CianParser(location="Москва")
 def main():
     t = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
 
-    for i in range(1, 5):
+    for i in range(1, 4):
         file_path = f'-pabd25/data/row/room_{i}_{t}.csv'
         data = moscow_parser.get_flats(
             deal_type='sale', 
