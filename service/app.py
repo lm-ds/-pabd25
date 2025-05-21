@@ -1,13 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 import logging 
+import joblib
+import pandas as pd
 
 
 app = Flask(__name__)
+model = joblib.load('/Users/lubovmoskalenko/Documents/python/-pabd25/models learn/models/linear_regression_model.pkl') 
 
 logger = logging.getLogger(name=None)
 logger.setLevel(logging.INFO)
 format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-to_file = logging.FileHandler('-pabd25/src/service/log.txt', encoding='utf-8')
+to_file = logging.FileHandler('-pabd25/models learn/logs/app_logs.log', encoding='utf-8')
 to_file.setLevel(logging.INFO)
 to_file.setFormatter(format)
 logger.addHandler(to_file)
@@ -32,16 +35,16 @@ def process_numbers():
     rooms = int(numbers['rooms'])
     floors = int(numbers['floors'])
     floor = int(numbers['floor'])
-    price = 300000 * int(area)
-
+    input_df = pd.DataFrame({'total_meters': [area]})
+    predicted_price = model.predict(input_df)[0]
     logging.info(f'Полученные данные: Площадь квартиры, кв.м. = {area}, Кол-во комнат = {rooms}, Этажей в доме = {floors}, Желаемый этаж = {floor}')
 
     if floors < floor:
         error_msg = 'Выбранный этаж квартиры не может быть больше общего числа этажей.'
         return {'Price' : error_msg}
     else:
-        logging.info(f'Расчётная цена: {price}')
-        return {'Price' : price}
+        logging.info(f'Расчётная цена: {predicted_price}')
+        return {'Price' : predicted_price}
 
 
 
