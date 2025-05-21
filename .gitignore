@@ -1,3 +1,5 @@
 venv
 data
 -pabd25/src/service/log.txt
+env_git
+logs
