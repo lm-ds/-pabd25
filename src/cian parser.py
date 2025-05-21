@@ -1,5 +1,4 @@
 import datetime
-import os
 import cianparser
 import pandas as pd
 
@@ -8,10 +7,9 @@ moscow_parser = cianparser.CianParser(location="Москва")
 
 def main():
     t = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    os.makedirs('data/row', exist_ok=True)
 
     for i in range(1, 5):
-        file_path = f'data/row/room_{i}_{t}.csv'
+        file_path = f'-pabd25/data/row/room_{i}_{t}.csv'
         data = moscow_parser.get_flats(
             deal_type='sale', 
             rooms=(i,), 
