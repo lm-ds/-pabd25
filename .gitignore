@@ -1,3 +1,8 @@
 venv
 data
 -pabd25/src/service/log.txt
+.log
+env_git
+env_git/bin
+env_git/bin/activate
+env_git/bin/activate

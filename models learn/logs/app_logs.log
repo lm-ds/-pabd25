@@ -1,0 +1,19 @@
+2025-05-21 21:58:55,357 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 21:58:55,357 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 21:58:55,358 - INFO -  * Restarting with stat
+2025-05-21 21:58:56,389 - WARNING -  * Debugger is active!
+2025-05-21 21:58:56,424 - INFO -  * Debugger PIN: 132-861-114
+2025-05-21 21:59:06,946 - INFO - 127.0.0.1 - - [21/May/2025 21:59:06] "GET / HTTP/1.1" 200 -
+2025-05-21 21:59:07,369 - INFO - 127.0.0.1 - - [21/May/2025 21:59:07] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 21:59:16,132 - INFO - Полученные данные: Площадь квартиры, кв.м. = 45, Кол-во комнат = 2, Этажей в доме = 20, Желаемый этаж = 15
+2025-05-21 21:59:16,132 - INFO - Расчётная цена: 21641032.445345998
+2025-05-21 21:59:16,133 - INFO - 127.0.0.1 - - [21/May/2025 21:59:16] "POST /api/numbers HTTP/1.1" 200 -
+2025-05-22 14:19:16,001 - INFO -  * Detected change in '/Users/lubovmoskalenko/Documents/python/-pabd25/service/app.py', reloading
+2025-05-22 14:19:16,393 - INFO -  * Restarting with stat
+2025-05-22 14:19:18,587 - WARNING -  * Debugger is active!
+2025-05-22 14:19:18,628 - INFO -  * Debugger PIN: 132-861-114
+2025-05-22 14:19:19,691 - INFO -  * Detected change in '/Users/lubovmoskalenko/Documents/python/-pabd25/service/app.py', reloading
+2025-05-22 14:19:19,991 - INFO -  * Restarting with stat
+2025-05-22 14:19:21,113 - WARNING -  * Debugger is active!
+2025-05-22 14:19:21,130 - INFO -  * Debugger PIN: 132-861-114
