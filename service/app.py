@@ -40,17 +40,6 @@ def load_model(model_name):
         raise
 
 
-def get_model_name_from_args():
-    parser = argparse.ArgumentParser(
-        description="Запуск приложения для предсказания цены"
-    )
-    parser.add_argument(
-        "-m", "--model", required=True, help="Название модели (без расширения .pkl)"
-    )
-    args = parser.parse_args()
-    return args.model
-
-
 # Маршрут для отображения формы
 @app.route("/")
 def index():
@@ -82,7 +71,4 @@ def process_numbers():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    model_name = (
-        get_model_name_from_args()
-    )
-    model = load_model(model_name)
+    model = load_model()
