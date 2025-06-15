@@ -13,13 +13,18 @@ housing_price_prediction/
 ├── data/
 │   ├── raw/                # Исходные данные
 │   ├── processed/          # Обработанные данные
-├── models/                 # Обученные модели
-├── notebooks/             # Jupyter notebooks
-├── src/                   # Исходный код
-│   ├── data.py            # Обработка данных
-│   ├── models.py          # Модели машинного обучения
-│   └── utils.py           # Вспомогательные функции
-├── requirements.txt       # Требования к зависимостям
+├── models learn/           # Jupyter notebooks
+|   ├── models/             # Обученные модели
+│   ├── eda.ipynb           # Предобработка данных
+│   └── train.ipynb         # Обучение моделей
+├── service/                # Сервис предсказания цены на недвижимость
+│   ├── templates/          # Шаблоны для веб-приложения
+│   │    └── index.html     # Шаблон веб-приложения
+│   └── app.py              # Flask приложение
+├── src/                    # Исходный код
+│   ├── lifecycle.py        # Жизненный цикл приложения
+│   └── cian parser.py      # Парсер исходных данных с циана
+├── requirements.txt        # Требования к зависимостям
 └── README.md
 ```
 
@@ -40,7 +45,7 @@ housing_price_prediction/
 ### Как запустить
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/yourusername/housing_price_prediction.git
+git clone https://github.com/lm-ds/-pabd25.git
 ```
 
 2. Установите зависимости:
@@ -54,11 +59,7 @@ jupyter notebook
 ```
 
 ### Модели машинного обучения
-* **Linear Regression** - базовая линейная регрессия
 * **Random Forest** - ансамбль деревьев решений
-* **Gradient Boosting** - градиентный бустинг
-* **XGBoost** - экстремальный градиентный бустинг
-* **Neural Networks** - нейронные сети
 
 ### Метрики оценки
 * **Mean Absolute Error (MAE)**
@@ -68,9 +69,10 @@ jupyter notebook
 
 ### Результаты
 После обучения модели достигаются следующие результаты:
-* MAE: ~$2000
-* RMSE: ~$2500
-* R² Score: ~0.85
+* MAE: 9503896.09
+* RMSE: 13739405.30
+* MSE: 188771257943171.44
+* R² Score: 0.735667
 
 ### Как использовать модель
 1. Загрузите данные в формате CSV
@@ -79,15 +81,12 @@ jupyter notebook
 4. Сделайте предсказания
 
 ### Команда
-* **Data Scientist**: [Имя Фамилия]
-* **ML Engineer**: [Имя Фамилия]
-* **Product Manager**: [Имя Фамилия]
+* **Data Scientist**: Москаленко Любовь
+* **ML Engineer**: Москаленко Любовь
+* **Product Manager**: Москаленко Любовь
 
-### Лицензирование
-Этот проект распространяется под лицензией MIT. Смотрите файл LICENSE для деталей.
 
 ### Контакты
 Для вопросов и предложений обращайтесь:
-* Email: your.email@example.com
-* GitHub: @yourusername
-* LinkedIn: linkedin.com/in/yourusername
+* Email: l.moskalenko2002@gmail.com
+* GitHub: @lm-ds
