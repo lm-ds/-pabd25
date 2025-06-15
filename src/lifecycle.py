@@ -60,16 +60,15 @@ def preprocess_data():
     df = main_dataframe[["url_id", "total_meters", "floor", "floors_count", "rooms_count", "price"]].dropna().set_index("url_id")
 
     df = df[(df["total_meters"] <= 300) & (df["price"] < 100_000_000)]
-    df = df.drop(columns=['url_id'])
+    # df = df.drop(columns=['url_id'])
 
     df.to_csv("/Users/lubovmoskalenko/Documents/python/-pabd25/data/processed/merged_cleaned.csv", encoding="utf-8")
 
 
-def train(model_name):
+def train():
     data = pd.read_csv("/Users/lubovmoskalenko/Documents/python/-pabd25/data/processed/merged_cleaned.csv")
-    data = data.dropna(subset=["total_meters", "price"])
-
-    X = data[["total_meters"]]
+    
+    X = data[["total_meters", "floor", "floors_count", "rooms_count"]]
     y = data["price"]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
@@ -93,17 +92,26 @@ def train(model_name):
     logging.info(f"Свободный член (intercept): {model.intercept_:.2f}")
 
     os.makedirs("models", exist_ok=True)
-    model_path = f"models/{model_name}.pkl"
+    model_path = f"models/linear_regression_model.pkl"
 
     joblib.dump(model, model_path)
 
 
-def test(model_name):
-    model_path = f"models/{model_name}.pkl"
+def test():
+    model_path = f"models/linear_regression_model.pkl"
     model = joblib.load(model_path)
-    data = pd.read_csv("/Users/lubovmoskalenko/Documents/python/-pabd25/data/processed/merged_cleaned.csv")
 
-    predicted_prices = model.predict(data)
+    data = [
+        {"total_meters": 45, "floor": 2, "floors_count": 5, "rooms_count": 2},
+        {"total_meters": 60, "floor": 4, "floors_count": 9, "rooms_count": 3},
+        {"total_meters": 30, "floor": 1, "floors_count": 3, "rooms_count": 1},
+        {"total_meters": 80, "floor": 6, "floors_count": 12, "rooms_count": 4},
+    ]
+
+    input_df = pd.DataFrame(data)
+
+    # Предсказание
+    predicted_prices = model.predict(input_df)
 
     logging.info("=== Предсказания модели по массиву данных ===")
     for features, price in zip(data, predicted_prices):
@@ -128,7 +136,7 @@ if __name__ == "__main__":
         help="Amount of pages to parse",
     )
     args = parser.parse_args()
-    parse_cian(args.pages)
+    # parse_cian(args.pages)
     preprocess_data()
-    train(args.pages)
-    test(args.pages)
+    train()
+    test()
