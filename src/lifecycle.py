@@ -8,6 +8,7 @@ import joblib
 import logging
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 import argparse
@@ -67,14 +68,19 @@ def preprocess_data():
 
 def train():
     data = pd.read_csv("/Users/lubovmoskalenko/Documents/python/-pabd25/data/processed/merged_cleaned.csv")
-    
+
     X = data[["total_meters", "floor", "floors_count", "rooms_count"]]
     y = data["price"]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
 
-    model = LinearRegression()
+    model = RandomForestRegressor(
+    n_estimators=200, 
+    max_depth=15,      
+    min_samples_split=5,  
+    random_state=42
+    )
     model.fit(X_train, y_train)
 
     y_pred = model.predict(X_test)
@@ -88,17 +94,16 @@ def train():
     logging.info(f"Корень из MSE (RMSE): {rmse:.2f}")
     logging.info(f"Коэффициент детерминации R²: {r2:.6f}")
     logging.info(f"Средняя абсолютная ошибка (MAE): {mae:.2f} рублей")
-    logging.info(f"Коэффициент при площади: {model.coef_[0]:.2f}")
-    logging.info(f"Свободный член (intercept): {model.intercept_:.2f}")
+    logging.info(f"Важности признаков: {model.feature_importances_}")
 
     os.makedirs("models", exist_ok=True)
-    model_path = f"models/linear_regression_model.pkl"
+    model_path = f"/Users/lubovmoskalenko/Documents/python/-pabd25/models learn/models/random_forest.pkl"
 
     joblib.dump(model, model_path)
 
 
 def test():
-    model_path = f"models/linear_regression_model.pkl"
+    model_path = f"/Users/lubovmoskalenko/Documents/python/-pabd25/models learn/models/random_forest.pkl"
     model = joblib.load(model_path)
 
     data = [
@@ -110,7 +115,6 @@ def test():
 
     input_df = pd.DataFrame(data)
 
-    # Предсказание
     predicted_prices = model.predict(input_df)
 
     logging.info("=== Предсказания модели по массиву данных ===")
